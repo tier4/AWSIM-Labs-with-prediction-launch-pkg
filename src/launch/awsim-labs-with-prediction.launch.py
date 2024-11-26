@@ -46,14 +46,14 @@ def generate_launch_description():
         ]
     )
 
-    # set map-lodaer-node
+    # set map-loader-node
     lanelet2_map_loader_param_file = os.path.join(
         get_package_share_directory("awsim_map_loader"), "config/lanelet2_map_loader.param.yaml"
     )
     with open(lanelet2_map_loader_param_file, "r") as f:
         lanelet2_map_loader_param = yaml.safe_load(f)["/**"]["ros__parameters"]
     add_launch_arg('lanelet2_map_path', '', 'path to lanelet2_map.osm')
-    map_lodaer_Node = Node(
+    map_loader_Node = Node(
         package="awsim_map_loader",
         namespace="AWSIM",
         executable="lanelet2_map_loader",
@@ -101,7 +101,7 @@ def generate_launch_description():
     return launch.LaunchDescription(
         [
         prediction_Node,
-        map_lodaer_Node,
+        map_loader_Node,
         map_projection_Node,
         awsim_with_prediction,
         ]
