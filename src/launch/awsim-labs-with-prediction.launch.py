@@ -79,7 +79,7 @@ def generate_launch_description():
     map_projection_Node = Node(
         package="awsim_map_projection_loader",
         namespace="AWSIM",
-        executable="map_projection_loader",
+        executable="awsim_map_projection_loader_node",
         name="map_projection_loader",
         output="both",
         parameters=[
