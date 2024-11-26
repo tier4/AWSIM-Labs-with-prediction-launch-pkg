@@ -70,6 +70,26 @@ def generate_launch_description():
         ]
     )
 
+    # set map-projection-node
+    map_projection_loader_param_file = os.path.join(
+        get_package_share_directory("awsim_map_projection_loader"), "config/map_projection_loader.param.yaml"
+    )
+    with open(map_projection_loader_param_file, "r") as f:
+        map_projection_loader_param = yaml.safe_load(f)["/**"]["ros__parameters"]
+    map_projection_Node = Node(
+        package="awsim_map_projection_loader",
+        namespace="AWSIM",
+        executable="map_projection_loader",
+        name="map_projection_loader",
+        output="both",
+        parameters=[
+            map_projection_loader_param,
+            {
+                'lanelet2_map_path': LaunchConfiguration('lanelet2_map_path'),
+            }
+        ],
+    )
+
     # set AWSIM
     awsim_with_prediction = ExecuteProcess(
         cmd=[[
@@ -82,6 +102,7 @@ def generate_launch_description():
         [
         prediction_Node,
         map_lodaer_Node,
+        map_projection_Node,
         awsim_with_prediction,
         ]
     )
