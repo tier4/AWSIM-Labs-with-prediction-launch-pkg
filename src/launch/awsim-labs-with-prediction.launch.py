@@ -66,6 +66,7 @@ def generate_launch_description():
             }
         ],
         remappings=[
+            ('/map/map_projector_info','map/map_projector_info'),
             ('output/lanelet2_map','map/vector_map')
         ]
     )
@@ -88,6 +89,9 @@ def generate_launch_description():
                 'lanelet2_map_path': LaunchConfiguration('lanelet2_map_path'),
             }
         ],
+        remappings=[
+            ('/map/map_projector_info','map/map_projector_info')
+        ]
     )
 
     # set AWSIM
