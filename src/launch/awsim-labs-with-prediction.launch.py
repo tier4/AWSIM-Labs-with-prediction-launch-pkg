@@ -21,9 +21,6 @@ from launch.substitutions import LaunchConfiguration
 import yaml
 
 def generate_launch_description():
-    launch_arguments = []
-    def add_launch_arg(name: str, default_value=None, description=None):
-        return  launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
     #set prediction-node
     map_based_prediction_param_file = os.path.join(
@@ -52,7 +49,6 @@ def generate_launch_description():
     )
     with open(lanelet2_map_loader_param_file, "r") as f:
         lanelet2_map_loader_param = yaml.safe_load(f)["/**"]["ros__parameters"]
-    add_launch_arg('lanelet2_map_path', '', 'path to lanelet2_map.osm')
     map_loader_Node = Node(
         package="awsim_map_loader",
         namespace="AWSIM",
